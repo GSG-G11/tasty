@@ -2,23 +2,26 @@ import React from 'react';
 import '../style.css';
 function Add(props) {
 
-  const { handleAddData, name, url, description } = props;
+  const { handleAddData, name, image, instructions,handleChange,index } = props;
+
   return (
     <div>
-      <form className="form" onSubmit={handleAddData}>
+      <form className="form" onSubmit={(e)=>handleAddData(e,index)}>
         <label>
-          <input  name="name" />
+          <input  name="name" value={name} onChange={handleChange} />
           recipy name
         </label>
         <label>
           <input
-          
-            name="description"
+          value={instructions}
+            name="instructions"
+            onChange={handleChange} 
           />
           description
         </label>
         <label>
-          <input  name="url" />
+          <input  name="image"onChange={handleChange}  value={image} />
+          
           url
         </label>
         <button > add </button>
