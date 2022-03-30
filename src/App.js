@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import RecipiesList from './components/RecipiesList';
 
 class App extends Component {
   state = {
@@ -22,10 +23,13 @@ class App extends Component {
         });
     }
   }
-
   render() {
     const { apiData } = this.state;
-    return <div></div>;
+    return (
+      <div>
+        <RecipiesList apiData={apiData} />
+      </div>
+    );
   }
 }
 
