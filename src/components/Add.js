@@ -9,7 +9,7 @@ function Add(props) {
     handleChange,
     index,
     DisplayForm,
-    title
+
   } = props;
 
   return (
