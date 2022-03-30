@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Add from './components/Add';
+import RecipiesList from './components/RecipiesList';
 
 class App extends Component {
   state = {
@@ -44,13 +45,14 @@ class App extends Component {
         });
     }
   }
-
   render() {
     const { apiData, name, description, url } = this.state;
     console.log(apiData)
+ 
     return <div>
+         
       <Add name={name} description={description} url={url} handleChange={this.handleChange} addRecipy={this.addRecipy} />
-
+      <RecipiesList apiData={apiData} />
     </div>;
   }
 }
