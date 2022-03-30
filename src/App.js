@@ -12,6 +12,7 @@ class App extends Component {
     index: '',
     id: 11,
     display: false,
+    filteredArray: [],
   };
   handleChange = ({ target }) => {
     this.setState({
@@ -21,7 +22,6 @@ class App extends Component {
   handleAddToApiData = (name, instructions, image, id, isOwn) => {
     this.setState((prevState) => ({
       apiData: [
-        ...prevState.apiData,
         {
           name,
           instructions,
@@ -29,6 +29,7 @@ class App extends Component {
           id,
           isOwn,
         },
+        ...prevState.apiData,
       ],
     }));
   };
@@ -76,6 +77,8 @@ class App extends Component {
         name: '',
         instructions: '',
         image: '',
+        searchTerm: '',
+        myRecepies: false,
       });
     }
   };
@@ -95,16 +98,14 @@ class App extends Component {
     });
   };
   handleSearch = (e) => {
-    const { apiData } = this.state;
     const searchTerm = e.target.value.trim().toLowerCase();
-
-    const filteredData = apiData.filter((item) => {
-      if (searchTerm.length === 0) return true;
-      return item.name.toLowerCase().includes(searchTerm);
-    });
-    this.setState({
-      apiData: filteredData,
-    });
+    this.setState({ searchTerm });
+  };
+  handleMyRecepies = () => {
+    this.setState({ myRecepies: true });
+  };
+  handleHomePage = () => {
+    this.setState({ myRecepies: false });
   };
   componentDidMount() {
     for (let i = 1; i <= 10; i++) {
@@ -128,6 +129,8 @@ class App extends Component {
         <Navbar
           DisplayForm={this.handleDisplayForm}
           handleSearch={this.handleSearch}
+          handleMyRecepies={this.handleMyRecepies}
+          handleHomePage={this.handleHomePage}
         />
         {display ? (
           <Add
@@ -142,11 +145,17 @@ class App extends Component {
           />
         ) : null}
 
-        <RecipiesList
-          apiData={apiData}
-          handleEdit={this.handleEdit}
-          handleDelete={this.handleDelete}
-        />
+        {apiData.length ? (
+          <RecipiesList
+            apiData={apiData}
+            handleEdit={this.handleEdit}
+            handleDelete={this.handleDelete}
+            searchTerm={this.state.searchTerm}
+            myRecepies={this.state.myRecepies}
+          />
+        ) : (
+          <div className="loader"></div>
+        )}
       </>
     );
   }

@@ -157,6 +157,9 @@ i:hover {
   justify-content: space-between;
   padding-left: 40px;
 }
+.logo-container:hover {
+  cursor: pointer;
+}
 
 .input {
   border: none;
@@ -188,4 +191,29 @@ i:hover {
 .recipies-controllers p:hover {
   color: white;
   text-decoration: underline;
+}
+.loader {
+  display: block;
+  width: 80px;
+  height: 80px;
+  margin: auto;
+}
+.loader:after {
+  content: ' ';
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6px solid #4caf50;
+  border-color: #4caf50 transparent #4caf50 transparent;
+  animation: loader 1.2s linear infinite;
+}
+@keyframes loader {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
