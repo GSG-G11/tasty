@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Navbar({ DisplayForm }) {
+function Navbar({ DisplayForm, handleSearch }) {
   return (
     <nav className="nav-wrapper">
       <div className="logo-container">
@@ -12,7 +12,13 @@ function Navbar({ DisplayForm }) {
         <h4>Tasty</h4>
       </div>
       <form className="form-wrapper">
-        <input className="input" placeholder="Search for recipies" required />
+        <input
+          onChange={handleSearch}
+          name="search"
+          className="input"
+          placeholder="Search for recipies"
+          required
+        />
         <i className="fa fa-search" />
       </form>
       <div className="recipies-controllers">

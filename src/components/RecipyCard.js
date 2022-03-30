@@ -16,14 +16,16 @@ class RecipyCard extends React.Component {
   };
   render() {
     const { height } = this.state;
-    const { recipy ,handleEdit ,handleDelete} = this.props;
+    const { recipy, handleEdit, handleDelete } = this.props;
     const { isOwn } = recipy;
 
     return (
       <div className="recipy-card">
         {isOwn ? (
           <div className="recipy-card-header">
-            <p   onClick={() => handleEdit(recipy.id)}><i className="fa fa-edit" id="edit-icon"></i></p>   
+            <p onClick={() => handleEdit(recipy.id)}>
+              <i className="fa fa-edit" id="edit-icon"></i>
+            </p>
             <i
               className="fa fa-trash"
               id="trash-icon"
@@ -43,7 +45,7 @@ class RecipyCard extends React.Component {
             </button>
           )}
           {
-            <AnimateHeight id="example-panel" duration={1000} height={height}>
+            <AnimateHeight id="example-panel" duration={500} height={height}>
               <div>
                 <p className="recipy-card__description">
                   {recipy.instructions}
