@@ -16,14 +16,14 @@ class RecipyCard extends React.Component {
   };
   render() {
     const { height } = this.state;
-    const { recipy, handleDelete } = this.props;
+    const { recipy ,handleEdit ,handleDelete} = this.props;
     const { isOwn } = recipy;
-    console.log(isOwn);
+
     return (
       <div className="recipy-card">
         {isOwn ? (
           <div className="recipy-card-header">
-            <i className="fa fa-edit" id="edit-icon"></i>
+            <p   onClick={() => handleEdit(recipy.id)}><i className="fa fa-edit" id="edit-icon"></i></p>   
             <i
               className="fa fa-trash"
               id="trash-icon"
