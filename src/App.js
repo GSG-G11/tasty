@@ -5,12 +5,12 @@ import RecipiesList from './components/RecipiesList';
 class App extends Component {
   state = {
     apiData: [],
-    name: "",
-    description: "",
-    url: "",
-    id:11
+    name: '',
+    description: '',
+    url: '',
+    id: 11,
   };
-  handleAddToApiData = (name, instructions, image ,id,isOwn) => {
+  handleAddToApiData = (name, instructions, image, id, isOwn) => {
     this.setState((prevState) => ({
       apiData: [
         ...prevState.apiData,
@@ -19,41 +19,57 @@ class App extends Component {
           instructions,
           image,
           id,
-          isOwn
+          isOwn,
         },
       ],
     }));
-  }
+  };
   addRecipy = () => {
-
-    const { name, url, description,id } = this.state
-    this.handleAddToApiData(name, description, url,id ,true)
-    this.setState((prevState)=>(prevState.id = prevState.id +1))
-  }
+    const { name, url, description, id } = this.state;
+    this.handleAddToApiData(name, description, url, id, true);
+    this.setState((prevState) => (prevState.id = prevState.id + 1));
+  };
   handleChange = ({ target }) => {
     this.setState({
       [target.name]: target.value,
-      
-    })
-  }
+    });
+  };
+  handleDelete = (id) => {
+    this.setState((prevState) => ({
+      apiData: prevState.apiData.filter((ele) => ele.id !== id),
+    }));
+  };
   componentDidMount() {
     for (let i = 1; i <= 10; i++) {
       fetch('https://www.themealdb.com/api/json/v1/1/random.php')
         .then((res) => res.json())
         .then(({ meals: [{ strMeal, strInstructions, strMealThumb }] }) => {
-          this.handleAddToApiData(strMeal, strInstructions, strMealThumb ,i,false)
+          this.handleAddToApiData(
+            strMeal,
+            strInstructions,
+            strMealThumb,
+            i,
+            false
+          );
         });
     }
   }
   render() {
     const { apiData, name, description, url } = this.state;
-    console.log(apiData)
- 
-    return <div>
-         
-      <Add name={name} description={description} url={url} handleChange={this.handleChange} addRecipy={this.addRecipy} />
-      <RecipiesList apiData={apiData} />
-    </div>;
+    console.log(apiData);
+
+    return (
+      <div>
+        <Add
+          name={name}
+          description={description}
+          url={url}
+          handleChange={this.handleChange}
+          addRecipy={this.addRecipy}
+        />
+        <RecipiesList apiData={apiData} handleDelete={this.handleDelete} />
+      </div>
+    );
   }
 }
 
