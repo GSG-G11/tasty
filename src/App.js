@@ -84,7 +84,14 @@ class App extends Component {
   }
 
   handleDisplayForm = () => {
+  
     this.setState((prevState) => prevState.display = !prevState.display)
+    this.setState({
+      index: "",
+      name: "",
+      instructions: "",
+      image: ""
+    })
   }
   componentDidMount() {
     for (let i = 1; i <= 10; i++) {
@@ -113,7 +120,8 @@ class App extends Component {
           index={index}
           handleAddData={this.handleAddData}
           addRecipy={this.addRecipy}
-          handleChange={this.handleChange}/> : null}
+          handleChange={this.handleChange}
+          DisplayForm={this.handleDisplayForm}/> : null}
 
         <RecipiesList
           apiData={apiData}
