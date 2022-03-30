@@ -11,15 +11,13 @@ class App extends Component {
     image: '',
     index: '',
     id: 11,
-    display: false
+    display: false,
   };
   handleChange = ({ target }) => {
     this.setState({
-      [target.name]: target.value
-    })
-
-
-  }
+      [target.name]: target.value,
+    });
+  };
   handleAddToApiData = (name, instructions, image, id, isOwn) => {
     this.setState((prevState) => ({
       apiData: [
@@ -33,66 +31,69 @@ class App extends Component {
         },
       ],
     }));
-  }
+  };
 
   handleEdit = (id) => {
-    const { apiData } = this.state
-    this.handleDisplayForm()
-    let index = apiData.findIndex((item) =>item.id === id)
-    const { name, image, instructions } = apiData[index]
+    const { apiData } = this.state;
+    this.handleDisplayForm();
+    let index = apiData.findIndex((item) => item.id === id);
+    const { name, image, instructions } = apiData[index];
     this.setState({
       name,
       image,
       instructions,
-      index
-    })
-  }
+      index,
+    });
+  };
 
   handleAddData = (e, indexRecipy) => {
     e.preventDefault();
-    const { name, instructions, image } = e.target
-    const { id ,apiData} = this.state
+    const { name, instructions, image } = e.target;
+    const { id, apiData } = this.state;
     if (!indexRecipy) {
-      this.setState((prevState) => (prevState.id = prevState.id + 1))
+      this.setState((prevState) => (prevState.id = prevState.id + 1));
       this.setState({
         display: false,
-        name: "",
-        instructions: "",
-        image: ""
-      })
-      this.handleAddToApiData(name.value, instructions.value, image.value, id, true)
+        name: '',
+        instructions: '',
+        image: '',
+      });
+      this.handleAddToApiData(
+        name.value,
+        instructions.value,
+        image.value,
+        id,
+        true
+      );
     } else {
-      apiData[indexRecipy].name = name.value
-      apiData[indexRecipy].instructions = instructions.value
-      apiData[indexRecipy].image = image.value
+      apiData[indexRecipy].name = name.value;
+      apiData[indexRecipy].instructions = instructions.value;
+      apiData[indexRecipy].image = image.value;
       this.setState({
         apiData,
-        index: "",
+        index: '',
         display: false,
-        name: "",
-        instructions: "",
-        image: ""
-      })
+        name: '',
+        instructions: '',
+        image: '',
+      });
     }
-
-
   };
   handleDelete = (id) => {
     this.setState((prevState) => ({
       apiData: prevState.apiData.filter((ele) => ele.id !== id),
     }));
-  }
+  };
 
   handleDisplayForm = () => {
-  
-    this.setState((prevState) => prevState.display = !prevState.display)
+    this.setState((prevState) => (prevState.display = !prevState.display));
     this.setState({
-      index: "",
-      name: "",
-      instructions: "",
-      image: ""
-    })
-  }
+      index: '',
+      name: '',
+      instructions: '',
+      image: '',
+    });
+  };
   componentDidMount() {
     for (let i = 1; i <= 10; i++) {
       fetch('https://www.themealdb.com/api/json/v1/1/random.php')
@@ -109,25 +110,30 @@ class App extends Component {
     }
   }
   render() {
-
     const { apiData, name, instructions, image, display, index } = this.state;
     return (
-      <div>
+      <>
         <Navbar DisplayForm={this.handleDisplayForm} />
-        {display ? <Add name={name}
-          instructions={instructions}
-          image={image}
-          index={index}
-          handleAddData={this.handleAddData}
-          addRecipy={this.addRecipy}
-          handleChange={this.handleChange}
-          DisplayForm={this.handleDisplayForm}/> : null}
+        {display ? (
+          <Add
+            name={name}
+            instructions={instructions}
+            image={image}
+            index={index}
+            handleAddData={this.handleAddData}
+            addRecipy={this.addRecipy}
+            handleChange={this.handleChange}
+            DisplayForm={this.handleDisplayForm}
+          />
+        ) : null}
 
         <RecipiesList
           apiData={apiData}
           handleEdit={this.handleEdit}
-          handleDelete={this.handleDelete}/>
-      </div>);
+          handleDelete={this.handleDelete}
+        />
+      </>
+    );
   }
 }
 
