@@ -1,30 +1,27 @@
 import React from 'react';
 import '../style.css';
 function Add(props) {
-  const onSubmit = (e) => {
-    e.preventDefault();
-  };
-  const { handleChange, name, url, description, addRecipy } = props;
+
+  const { handleAddData, name, url, description } = props;
   return (
     <div>
-      <form className="form" onSubmit={onSubmit}>
+      <form className="form" onSubmit={handleAddData}>
         <label>
-          <input onChange={handleChange} value={name} name="name" />
+          <input  name="name" />
           recipy name
         </label>
         <label>
           <input
-            onChange={handleChange}
-            value={description}
+          
             name="description"
           />
           description
         </label>
         <label>
-          <input onChange={handleChange} value={url} name="url" />
+          <input  name="url" />
           url
         </label>
-        <button onClick={addRecipy}> add </button>
+        <button > add </button>
       </form>
     </div>
   );

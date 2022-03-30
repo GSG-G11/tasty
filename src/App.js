@@ -24,18 +24,26 @@ class App extends Component {
       ],
     }));
   }
-  addRecipy = () => {
 
-    const { name, url, description,id } = this.state
-    this.handleAddToApiData(name, description, url,id ,true)
-    this.setState((prevState)=>(prevState.id = prevState.id +1))
-  }
-  handleChange = ({ target }) => {
+  editRecipy=(id)=>{
+    const {apiData}=this.state
+    let idforRecipy = apiData.findIndex((item) => {
+      return item.id === id
+    })
+    apiData[idforRecipy].name="add"
+    apiData.description="add"
     this.setState({
-      [target.name]: target.value,
-      
+      apiData
     })
   }
+  handleAddData= (e) => {
+    e.preventDefault();
+    const {id}=this.state
+    const {name ,description,url }=e.target
+    this.setState((prevState)=>(prevState.id = prevState.id +1))
+    this.handleAddToApiData(name.value, description.value, url.value,id ,true)
+    
+  };
   componentDidMount() {
     for (let i = 1; i <= 10; i++) {
       fetch('https://www.themealdb.com/api/json/v1/1/random.php')
@@ -47,12 +55,12 @@ class App extends Component {
   }
   render() {
     const { apiData, name, description, url } = this.state;
-    console.log(apiData)
+    
  
     return <div>
          
-      <Add name={name} description={description} url={url} handleChange={this.handleChange} addRecipy={this.addRecipy} />
-      <RecipiesList apiData={apiData} />
+      <Add name={name} description={description} url={url} handleAddData={this.handleAddData} addRecipy={this.addRecipy} />
+      <RecipiesList apiData={apiData} editRecipy={this.editRecipy}  />
     </div>;
   }
 }
