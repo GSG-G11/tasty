@@ -1,3 +1,4 @@
+import '../style.css';
 const RecipyCard = ({ recipy }) => {
   return (
     <div className="recipy-card">
