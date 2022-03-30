@@ -21,7 +21,8 @@ class App extends Component {
   };
   handleAddToApiData = (name, instructions, image, id, isOwn) => {
     this.setState((prevState) => ({
-      apiData: [
+      apiData: [ 
+        ...prevState.apiData,  
         {
           name,
           instructions,
@@ -29,7 +30,7 @@ class App extends Component {
           id,
           isOwn,
         },
-        ...prevState.apiData,
+       
       ],
     }));
   };
@@ -49,11 +50,13 @@ class App extends Component {
 
   handleAddData = (e, indexRecipy) => {
     e.preventDefault();
+  
     const { name, instructions, image } = e.target;
     const { id, apiData } = this.state;
     if (!indexRecipy) {
       this.setState((prevState) => (prevState.id = prevState.id + 1));
       this.setState({
+        title:"add",
         display: false,
         name: '',
         instructions: '',
@@ -71,6 +74,7 @@ class App extends Component {
       apiData[indexRecipy].instructions = instructions.value;
       apiData[indexRecipy].image = image.value;
       this.setState({
+        title:"edit",
         apiData,
         index: '',
         display: false,

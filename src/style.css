@@ -68,8 +68,8 @@ img {
   left: 30%;
 }
 .form label {
-  align-items: flex-start;
-  margin-bottom: 5px;
+  align-self: flex-start;
+  margin-bottom: 2px;
 }
 
 .form input {
@@ -80,6 +80,7 @@ img {
   padding: 7px;
   margin-bottom: 10px;
 }
+
 input:focus {
   outline: none !important;
   border-color: #4caf50;
@@ -97,9 +98,12 @@ input:focus {
   margin-bottom: 10px;
 }
 .footer {
+  margin-top: 11px;
+  align-self: flex-end;
   display: flex;
   justify-content: flex-end;
-  padding-bottom: 20px;
+  padding-bottom: 11px;
+
 }
 .title {
   text-align: center;
@@ -108,7 +112,7 @@ input:focus {
   background-color: #4caf50;
   border: none;
   color: white;
-  padding: 15px 32px;
+  padding: 5px 15px;
   text-align: center;
   text-decoration: none;
   display: inline-block;

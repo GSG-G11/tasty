@@ -9,10 +9,13 @@ function Add(props) {
     handleChange,
     index,
     DisplayForm,
+    title
   } = props;
 
   return (
+
     <div>
+  
       <form className="form" onSubmit={(e) => handleAddData(e, index)}>
         <h2 className="title">Add Recipy</h2>
         <label>Recipy Name </label>

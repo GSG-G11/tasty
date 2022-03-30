@@ -15,7 +15,8 @@ const RecipiesList = ({
     .filter((item) => {
       if (searchTerm.length === 0) return true;
       return item.name.toLowerCase().includes(searchTerm);
-    });
+    }).sort((a,b)=>b.id - a.id)
+   
   return (
     <div className="cards-container">
       {filterdData.length
