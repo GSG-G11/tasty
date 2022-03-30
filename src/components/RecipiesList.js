@@ -1,16 +1,33 @@
 import RecipyCard from './RecipyCard';
 import '../style.css';
-const RecipiesList = ({ apiData, handleEdit, handleDelete }) => {
+const RecipiesList = ({
+  apiData,
+  handleEdit,
+  handleDelete,
+  searchTerm = '',
+  myRecepies,
+}) => {
+  const filterdData = apiData
+    .filter((item) => {
+      if (!myRecepies) return true;
+      return item.isOwn;
+    })
+    .filter((item) => {
+      if (searchTerm.length === 0) return true;
+      return item.name.toLowerCase().includes(searchTerm);
+    });
   return (
     <div className="cards-container">
-      {apiData.map((ele) => (
-        <RecipyCard
-          recipy={ele}
-          key={ele.id}
-          handleEdit={handleEdit}
-          handleDelete={handleDelete}
-        />
-      ))}
+      {filterdData.length
+        ? filterdData.map((ele) => (
+            <RecipyCard
+              recipy={ele}
+              key={ele.id}
+              handleEdit={handleEdit}
+              handleDelete={handleDelete}
+            />
+          ))
+        : 'no recipies found'}
     </div>
   );
 };

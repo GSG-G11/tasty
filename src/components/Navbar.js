@@ -1,9 +1,14 @@
 import React from 'react';
 
-function Navbar({ DisplayForm, handleSearch }) {
+function Navbar({
+  DisplayForm,
+  handleSearch,
+  handleMyRecepies,
+  handleHomePage,
+}) {
   return (
     <nav className="nav-wrapper">
-      <div className="logo-container">
+      <div className="logo-container" onClick={handleHomePage}>
         <img
           src="https://media.discordapp.net/attachments/937648625293598821/958787308973359135/hamburger.png"
           alt="logo"
@@ -26,7 +31,7 @@ function Navbar({ DisplayForm, handleSearch }) {
           <i className="fa fa-plus"></i>
           Add Recipy
         </p>
-        <p>My recipies</p>
+        <p onClick={handleMyRecepies}>My recipies</p>
       </div>
     </nav>
   );
