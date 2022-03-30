@@ -98,11 +98,12 @@ input:focus {
   margin-bottom: 10px;
 }
 .footer {
-  margin-top: 10px;
+  margin-top: 11px;
   align-self: flex-end;
   display: flex;
   justify-content: flex-end;
-  padding-bottom: 10px;
+  padding-bottom: 11px;
+
 }
 .title {
   text-align: center;
