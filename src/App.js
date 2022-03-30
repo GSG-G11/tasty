@@ -94,6 +94,18 @@ class App extends Component {
       image: '',
     });
   };
+  handleSearch = (e) => {
+    const { apiData } = this.state;
+    const searchTerm = e.target.value.trim().toLowerCase();
+
+    const filteredData = apiData.filter((item) => {
+      if (searchTerm.length === 0) return true;
+      return item.name.toLowerCase().includes(searchTerm);
+    });
+    this.setState({
+      apiData: filteredData,
+    });
+  };
   componentDidMount() {
     for (let i = 1; i <= 10; i++) {
       fetch('https://www.themealdb.com/api/json/v1/1/random.php')
@@ -113,7 +125,10 @@ class App extends Component {
     const { apiData, name, instructions, image, display, index } = this.state;
     return (
       <>
-        <Navbar DisplayForm={this.handleDisplayForm} />
+        <Navbar
+          DisplayForm={this.handleDisplayForm}
+          handleSearch={this.handleSearch}
+        />
         {display ? (
           <Add
             name={name}
